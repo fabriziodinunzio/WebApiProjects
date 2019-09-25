@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using BookService.Models;
+using BookService.Models.DTO;
+using Newtonsoft.Json;
 
 namespace BookService.Controllers
 {
@@ -18,16 +20,52 @@ namespace BookService.Controllers
         private BookServiceContext db = new BookServiceContext();
 
         // GET: api/Books
-        public IQueryable<Book> GetBooks()
+        public async Task<HttpResponseMessage> GetBooksAsync()
         {
-            return db.Books;
+            HttpResponseMessage resp = null;
+            try
+            {
+                IList<BookDTO> bookList = await db.Books.Select(b => new BookDTO { Id = b.Id, AuthorName = b.Author.Name, Title = b.Title }).ToListAsync();
+                //string serializedBooks = JsonConvert.SerializeObject(bookList);
+                //Request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                resp = Request.CreateResponse(HttpStatusCode.OK, bookList);
+            }
+            catch (InvalidOperationException exOp)
+            {
+
+                resp = Request.CreateResponse(HttpStatusCode.InternalServerError, exOp.Message);
+            }
+            catch(Exception ex)
+            {
+                resp = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+            
+            return resp;
         }
 
+        //// GET: api/Books
+        //public IQueryable<Book> GetBooks()
+        //{
+        //    string serializedBooks = JsonConvert.SerializeObject(db.Books);
+        //    return db.Books;
+        //}
+
         // GET: api/Books/5
-        [ResponseType(typeof(Book))]
+        [ResponseType(typeof(BookDetailDTO))]
         public async Task<IHttpActionResult> GetBook(int id)
         {
-            Book book = await db.Books.FindAsync(id);
+            BookDetailDTO book = await db.Books
+                .Include(b => b.Author)
+                   .Select(c => new BookDetailDTO {
+                                                    AuthorName = c.Author.Name
+                                                    , Genre = c.Genre
+                                                    , Id = c.Id
+                                                    , Price = c.Price
+                                                    , Title = c.Title
+                                                    , Year = c.Year
+                                                }
+                   )
+                   .FirstOrDefaultAsync(d => d.Id == id);
             if (book == null)
             {
                 return NotFound();
@@ -72,7 +110,7 @@ namespace BookService.Controllers
         }
 
         // POST: api/Books
-        [ResponseType(typeof(Book))]
+        [ResponseType(typeof(BookDTO))]
         public async Task<IHttpActionResult> PostBook(Book book)
         {
             if (!ModelState.IsValid)
@@ -83,7 +121,7 @@ namespace BookService.Controllers
             db.Books.Add(book);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = book.Id }, book);
+            return CreatedAtRoute("DefaultApi", new { id = book.Id }, new BookDTO { Id = book.Id, AuthorName = book.Author.Name,  Title = book.Title });
         }
 
         // DELETE: api/Books/5
