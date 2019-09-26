@@ -6,8 +6,22 @@
         <div class="col-md-12">
             <h1>BookService</h1>
         </div>
-        <ul class="list-group" data-bind="foreach: books">
-            <li class="list-group-item" data-bind="text: Title" ></li>
-        </ul>
-    </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h2>Books</h2>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group" data-bind="foreach: books">
+                        <li class="list-group-item">
+                            <strong><span data-bind="text: AuthorName"></span></strong><i>: <span data-bind="text: Title" /></i>
+                            <a href="#" data-bind="click: $parent.getDetail">Details</a>
+                        </li>
+                    </ul>
+                </div>     
+            </div>           
+        </div>
+        
 </div>

@@ -20,42 +20,42 @@ namespace BookService.Controllers
         private BookServiceContext db = new BookServiceContext();
         //
         // GET: api/Books
-        //public async Task<HttpResponseMessage> GetBooksAsync()
-        //{
-        //    HttpResponseMessage resp = null;
-        //    try
-        //    {
-        //        IList<BookDTO> bookList = await db.Books.Select(b => new BookDTO { Id = b.Id, AuthorName = b.Author.Name, Title = b.Title }).ToListAsync();
-        //        //string serializedBooks = JsonConvert.SerializeObject(bookList);
-        //        //Request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-        //        resp = Request.CreateResponse(HttpStatusCode.OK, bookList);
-        //    }
-        //    catch (InvalidOperationException exOp)
-        //    {
-
-        //        resp = Request.CreateResponse(HttpStatusCode.InternalServerError, exOp.Message);
-        //    }
-        //    catch(Exception ex)
-        //    {
-        //        resp = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
-        //    }
-
-        ////    return resp;
-        //}
-
-        // GET: api/Books
-        public IQueryable<BookDTO> GetBooks()
+        public async Task<HttpResponseMessage> GetBooksAsync()
         {
-            var books = from b in db.Books
-                        select new BookDTO()
-                        {
-                            Id = b.Id,
-                            Title = b.Title,
-                            AuthorName = b.Author.Name
-                        };
+            HttpResponseMessage resp = null;
+            try
+            {
+                IList<BookDTO> bookList = await db.Books.Select(b => new BookDTO { Id = b.Id, AuthorName = b.Author.Name, Title = b.Title }).ToListAsync();
+                //string serializedBooks = JsonConvert.SerializeObject(bookList);
+                //Request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
+                resp = Request.CreateResponse(HttpStatusCode.OK, bookList);
+            }
+            catch (InvalidOperationException exOp)
+            {
 
-            return books;
+                resp = Request.CreateResponse(HttpStatusCode.InternalServerError, exOp.Message);
+            }
+            catch (Exception ex)
+            {
+                resp = Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+
+           return resp;
         }
+
+        //// GET: api/Books
+        //public IQueryable<BookDTO> GetBooks()
+        //{
+        //    var books = from b in db.Books
+        //                select new BookDTO()
+        //                {
+        //                    Id = b.Id,
+        //                    Title = b.Title,
+        //                    AuthorName = b.Author.Name
+        //                };
+
+        //    return books;
+        //}
 
         // GET: api/Books/5
         [ResponseType(typeof(BookDetailDTO))]
