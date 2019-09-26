@@ -26,8 +26,8 @@
         });
     }
 
-    self.getDetail = function(bookDetail) {
-        var currentUri = booksUri + bookDetail.Id;
+    self.getDetail = function(currentBook) {
+        var currentUri = booksUri + currentBook.Id;
         ajaxHelper(currentUri, 'GET').done(function (data) {
             self.detail(data);
         });

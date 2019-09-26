@@ -18,6 +18,7 @@
                         <li class="list-group-item">
                             <strong><span data-bind="text: AuthorName"></span></strong><i>: <span data-bind="text: Title" /></i>
                             <a href="#" data-bind="click: $parent.getDetail">Details</a>
+                            <div data-bind="visible: $parent.detail && $parent.detail.Id == Id">Ecco i dettagli</div>
                         </li>
                     </ul>
                 </div>     
