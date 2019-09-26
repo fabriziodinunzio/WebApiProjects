@@ -1,7 +1,13 @@
-﻿<div class="container">
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+<div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>BookService</h1>
         </div>
+        <ul class="list-group" data-bind="foreach: books">
+            <li class="list-group-item" data-bind="text: Title" ></li>
+        </ul>
     </div>
 </div>

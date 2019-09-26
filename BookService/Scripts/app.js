@@ -1,25 +1,30 @@
 ﻿var ViewModel = function () {
     var self = this;
-    var uri = 'api/books/';
     self.books = ko.observableArray();
     self.error = ko.observable();
-    function AjaxHelper(uri, method, data) {
+
+    var booksUri = '/api/books/';
+
+    function ajaxHelper(uri, method, data) {
+        self.error(''); // Clear error message
         return $.ajax({
             type: method,
             url: uri,
-            dataType: 'application/json',
+            dataType: 'json',
+            contentType: 'application/json',
             data: data ? JSON.stringify(data) : null
         }).fail(function (jqXHR, textStatus, errorThrown) {
             self.error(errorThrown);
         });
-    };
-
-    function getAllBooks() {
-        AjaxHelper(uri, 'GET').done(function (data) {
-            self.books(data);
-        })
     }
 
+    function getAllBooks() {
+        ajaxHelper(booksUri, 'GET').done(function (data) {
+            self.books(data);
+        });
+    }
+
+    // Fetch the initial data.
     getAllBooks();
 };
 
