@@ -6,7 +6,7 @@ using System.Web;
 namespace ProductsApp.Models
 {
 
-    // Modello dei prodotti
+    //// Modello dei prodotti
     public class Product
     {
         public int Id { get; set; }

@@ -17,7 +17,7 @@ namespace BookService.Controllers
     {
         private BookServiceContext db = new BookServiceContext();
 
-        // GET: api/Authors
+        //// GET: api/Authors
         public IQueryable<Author> GetAuthors()
         {
             return db.Authors;
