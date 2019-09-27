@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <h1>BookService</h1>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -18,11 +18,42 @@
                         <li class="list-group-item">
                             <strong><span data-bind="text: AuthorName"></span></strong><i>: <span data-bind="text: Title" /></i>
                             <a href="#" data-bind="click: $parent.getDetail">Details</a>
-                            <div data-bind="visible: $parent.detail && $parent.detail.Id == Id">Ecco i dettagli</div>
                         </li>
                     </ul>
-                </div>     
-            </div>           
+                </div>
+            </div>
         </div>
-        
-</div>
+        <!--ko if:detail()-->
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h3>Detail</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Author</th>
+                                <th>Title</th>
+                                <th>Year</th>
+                                <th>Genre</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-bind="text: detail().AuthorName"></td>
+                                <td data-bind="text: detail().Title"></td>
+                                <td data-bind="text: detail().Year"></td>
+                                <td data-bind="text: detail().Genre"></td>
+                                <td data-bind="text: detail().Price"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/ko-->
+    </div>
