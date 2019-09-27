@@ -28,17 +28,17 @@
         });
     }
 
+    function getAllAuthors() {
+        ajaxHelper(authorUrl, 'GET').done(function (data) {
+            self.authors(data);
+        });
+    }
+
     self.getDetail = function(currentBook) {
         var currentUri = booksUri + currentBook.Id;
         ajaxHelper(currentUri, 'GET').done(function (data) {
             self.detail(data);
         });
-
-        function getAllAuthors() {
-            ajaxHelper(authorUrl, 'GET').done(function (data) {
-                self.authors(data);
-            });
-        }
     }
 
     self.newBook = {
@@ -51,7 +51,7 @@
 
     var authorUrl = '/api/authors/';
 
-    self.addNewBook = function() {
+    self.addNewBook = function(formElement) {
         var book = {
             AuthorId: self.newBook.Author().Id,
             Title: self.newBook.Title(),
@@ -59,7 +59,7 @@
             Year: self.newBook.Year(),
             Price: self.newBook.Price()
         }
-        ajaxHelper(booksUri, 'POST').done(function (data) {
+        ajaxHelper(booksUri, 'POST',book).done(function (data) {
             self.books(data);
         });
     }

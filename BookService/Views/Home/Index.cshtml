@@ -1,7 +1,6 @@
 ﻿@section scripts {
     @Scripts.Render("~/bundles/app")
 }
-<div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1>BookService</h1>
@@ -16,7 +15,7 @@
                 <div class="panel-body">
                     <ul class="list-group" data-bind="foreach: books">
                         <li class="list-group-item">
-                            <strong><span data-bind="text: AuthorName"></span></strong><i>: <span data-bind="text: Title" /></i>
+                            <strong><span data-bind="text: AuthorName"></span></strong><i>: <span data-bind="text: Title"></span></i>
                             <a href="#" data-bind="click: $parent.getDetail">Details</a>
                         </li>
                     </ul>
@@ -24,7 +23,7 @@
             </div>
         </div>
         <!--ko if:detail()-->
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -64,22 +63,22 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form role="form">
+                    <form role="form" data-bind="submit: addNewBook">
                         <div class="form-group">
                             <label for="author">Author</label>
-                            <select data-bind="options: authors, optionsText: 'Name', value: newBook.Author" class="form-control" />
+                            <select data-bind="options: authors, optionsText: 'Name', value: newBook.Author" class="form-control"></select>
                             <label for="title">Title</label>
-                            <input type="text" data-bind="text: Title" class="form-control" id="title" />
+                            <input type="text" data-bind="value: newBook.Title" class="form-control" id="title" />
                             <label for="year">Year</label>
-                            <input type="text" data-bind="text: Year" class="form-control" id="year" />
+                            <input type="text" data-bind="value: newBook.Year" class="form-control" id="year" />
                             <label for="genre">Genre</label>
-                            <input type="text" data-bind="text: Genre" class="form-control" id="genre" />
+                            <input type="text" data-bind="value: newBook.Genre" class="form-control" id="genre" />
                             <label for="price">Price</label>
-                            <input type="text" data-bind="text: Price" class="form-control" id="price" />
+                            <input type="text" data-bind="value: newBook.Price" class="form-control" id="price" />
                         </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                 </div>
             </div> 
         </div>
     </div>
-</div>
