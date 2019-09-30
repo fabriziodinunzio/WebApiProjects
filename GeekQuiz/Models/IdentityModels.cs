@@ -29,5 +29,11 @@ namespace GeekQuiz.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<GeekQuiz.Models.TriviaAnswer> TriviaAnswers { get; set; }
+
+        public System.Data.Entity.DbSet<GeekQuiz.Models.TriviaOption> TriviaOptions { get; set; }
+
+        public System.Data.Entity.DbSet<GeekQuiz.Models.TriviaQuestion> TriviaQuestions { get; set; }
     }
 }
