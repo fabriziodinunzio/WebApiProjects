@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookService", "BookService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeekQuiz", "GeekQuiz\GeekQuiz.csproj", "{E4D5B612-ECEF-4EAE-A3EA-8C3CD94CA32A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Videos", "Videos\Videos.csproj", "{08319E01-8C2E-48B7-95B6-FAB87D6D42FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E4D5B612-ECEF-4EAE-A3EA-8C3CD94CA32A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4D5B612-ECEF-4EAE-A3EA-8C3CD94CA32A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4D5B612-ECEF-4EAE-A3EA-8C3CD94CA32A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08319E01-8C2E-48B7-95B6-FAB87D6D42FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08319E01-8C2E-48B7-95B6-FAB87D6D42FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08319E01-8C2E-48B7-95B6-FAB87D6D42FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08319E01-8C2E-48B7-95B6-FAB87D6D42FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
